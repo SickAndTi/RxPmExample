@@ -3,6 +3,7 @@
     package="com.krit.appforkrit">
 
     <application
+        android:name="com.krit.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

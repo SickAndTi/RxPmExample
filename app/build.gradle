@@ -16,6 +16,12 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas".toString())
+            }
+        }
     }
 
     buildTypes {
@@ -48,8 +54,24 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:2.24"
     implementation "com.google.dagger:dagger:2.24"
 
-    //retrofit
-    implementation "com.squareup.retrofit2:retrofit:2.7.2"
+    //retrofit + okhttp
+    def retrofitVersion = '2.7.2'
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.4.0"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+
+    //json
+    def moshiVersion = "1.6.0"
+    implementation "com.squareup.moshi:moshi:$moshiVersion"
+    implementation "com.squareup.moshi:moshi-adapters:$moshiVersion"
+    implementation "com.squareup.moshi:moshi-kotlin:$moshiVersion"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
+
+    //adapter delegate
+    implementation 'com.hannesdorfmann:adapterdelegates3:3.1.0'
+
+
 
     //navigation
     implementation "ru.terrakok.cicerone:cicerone:5.1.0"
@@ -61,5 +83,8 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     implementation "androidx.room:room-rxjava2:$room_version"
+
+    //logs
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 
 }
