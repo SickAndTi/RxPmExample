@@ -7,5 +7,6 @@ import androidx.room.PrimaryKey
 data class City (
     @PrimaryKey
     val id: Int,
+
     val name: String
 )
