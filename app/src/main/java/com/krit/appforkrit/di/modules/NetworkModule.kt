@@ -6,7 +6,10 @@ import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
+import okhttp3.HttpUrl
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -18,7 +21,7 @@ import java.util.*
 class NetworkModule {
 
     @Provides
-    fun provideOkhhtp() = OkHttpClient.Builder()
+    fun provideOkhhtp(interceptor: Interceptor) = OkHttpClient.Builder()
         .addInterceptor(
             HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger{
                 override fun log(message: String) {
@@ -27,6 +30,7 @@ class NetworkModule {
             })
                 .setLevel(HttpLoggingInterceptor.Level.BODY)
         )
+        .addInterceptor(interceptor)
         .build()
 
     @Provides
@@ -42,4 +46,16 @@ class NetworkModule {
         .add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe())
         .add(KotlinJsonAdapterFactory())
         .build()
+
+    @Provides
+    fun provideInterceptor() = object : Interceptor {
+        override fun intercept(chain: Interceptor.Chain): Response {
+            val request = chain.request()
+            val url = request.url.newBuilder()
+                .addQueryParameter("apikey", AppConstants.API_KEY)
+                .build()
+
+            return chain.proceed(request.newBuilder().url(url).build())
+        }
+    }
 }

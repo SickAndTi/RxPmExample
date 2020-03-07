@@ -2,8 +2,11 @@ package com.krit.appforkrit.di
 
 import com.krit.appforkrit.di.modules.*
 import com.krit.appforkrit.ui.activity.MainActivity
+import com.krit.appforkrit.ui.fragment.CityListFragment
 import dagger.Component
+import javax.inject.Singleton
 
+@Singleton
 @Component(
     modules = [
         AppModule::class,
@@ -15,5 +18,7 @@ import dagger.Component
 )
 interface AppComponent {
     fun inject(mainActivity: MainActivity)
+
+    fun inject(fragment: CityListFragment)
 
 }
