@@ -19,7 +19,7 @@ class App: Application() {
         COMPONENT = initDi()
     }
 
-    fun initDi() =
+    private fun initDi(): AppComponent =
         DaggerAppComponent.builder()
             .appModule(AppModule(this))
             .navigationModule(NavigationModule())
