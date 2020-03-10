@@ -1,6 +1,8 @@
 package com.krit.appforkrit.di
 
 import com.krit.appforkrit.di.modules.*
+import com.krit.appforkrit.domain.citylist.CityListInteractor
+import com.krit.appforkrit.presentation.CityListPm
 import com.krit.appforkrit.ui.activity.MainActivity
 import com.krit.appforkrit.ui.fragment.CityListFragment
 import com.krit.appforkrit.ui.fragment.SingleCityFragment

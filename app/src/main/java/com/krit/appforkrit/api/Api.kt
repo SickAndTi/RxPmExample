@@ -22,6 +22,6 @@ interface Api {
     @GET("currentconditions/v1/{locationKey}")
     fun getWeatherByLocationKey(
         @Query("details") fullInfo: Boolean,
-        @Path("locationKey") locationKey: String
+        @Path("locationKey") locationKey: Long
     ): Single<NwWeather>
 }

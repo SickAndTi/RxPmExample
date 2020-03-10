@@ -1,6 +1,8 @@
 package com.krit.appforkrit.di.modules
 
 import com.krit.appforkrit.AppConstants
+import com.krit.appforkrit.api.Api
+import com.krit.appforkrit.api.ApiClient
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -14,6 +16,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.create
 import timber.log.Timber
 import java.util.*
 
@@ -55,7 +58,15 @@ class NetworkModule {
                 .addQueryParameter("apikey", AppConstants.API_KEY)
                 .build()
 
-            return chain.proceed(request.newBuilder().url(url).build())
+            val response = chain.proceed(request
+                .newBuilder()
+                .url(url)
+                .build()
+            )
+            return response
         }
     }
+
+    @Provides
+    fun provideApi(retrofit: Retrofit) = retrofit.create(Api::class.java)
 }

@@ -38,6 +38,10 @@ android {
 
 }
 
+androidExtensions {
+    experimental = true
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -78,7 +82,8 @@ dependencies {
     kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
 
     //adapter delegate
-    implementation 'com.hannesdorfmann:adapterdelegates3:3.1.0'
+    implementation 'com.hannesdorfmann:adapterdelegates4-kotlin-dsl:4.2.0'
+    implementation 'com.hannesdorfmann:adapterdelegates4-kotlin-dsl-layoutcontainer:4.2.0'
 
     //navigation
     implementation "ru.terrakok.cicerone:cicerone:5.1.0"
