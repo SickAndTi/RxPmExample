@@ -63,6 +63,7 @@ dependencies {
     implementation 'me.dmdev.rxpm:rxpm:2.1'
     //rxbinding
     implementation 'com.jakewharton.rxbinding3:rxbinding:3.1.0'
+    implementation 'com.jakewharton.rxbinding3:rxbinding-appcompat:3.1.0'
 
     //di
     kapt "com.google.dagger:dagger-compiler:2.24"

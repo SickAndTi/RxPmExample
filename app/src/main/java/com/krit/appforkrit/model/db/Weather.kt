@@ -1,12 +1,23 @@
 package com.krit.appforkrit.model.db
 
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "weathers")
+@Entity(
+    tableName = "weathers",
+    foreignKeys = [
+        ForeignKey(
+            entity = City::class,
+            childColumns = ["locationKey"],
+            parentColumns = ["locationKey"],
+            onDelete = ForeignKey.CASCADE
+        )
+    ]
+)
 data class Weather (
-    @PrimaryKey
-    val id: Int,
+    @PrimaryKey(autoGenerate = false)
+    val locationKey: String,
 
     val temperature: Double? = null,
     val weatherDesc: String,

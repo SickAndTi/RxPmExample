@@ -8,7 +8,10 @@ import com.krit.appforkrit.model.db.City
 import com.krit.appforkrit.model.db.Weather
 
 @Database(
-    entities = [City::class, Weather::class],
+    entities = [
+        City::class,
+        Weather::class
+    ],
     version = 1
 )
 abstract class AppDatabase: RoomDatabase() {

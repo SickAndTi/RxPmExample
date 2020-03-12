@@ -1,14 +1,13 @@
 package com.krit.appforkrit.presentation
 
-import com.krit.appforkrit.domain.singlecity.SingleCityInteractor
-import io.reactivex.functions.BiConsumer
+import com.krit.appforkrit.domain.weather.WeatherInteractor
 import me.dmdev.rxpm.PresentationModel
 import ru.terrakok.cicerone.Router
 import timber.log.Timber
 import javax.inject.Inject
 
 class SingleCityPm @Inject constructor(
-    private val singleCityInteractor: SingleCityInteractor,
+    private val weatherInteractor: WeatherInteractor,
     private val router: Router
 ): PresentationModel() {
 

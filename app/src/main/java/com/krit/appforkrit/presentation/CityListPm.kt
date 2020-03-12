@@ -3,14 +3,11 @@ package com.krit.appforkrit.presentation
 import com.krit.appforkrit.Screens
 import com.krit.appforkrit.domain.citylist.CityListInteractor
 import com.krit.appforkrit.ui.adapter.view_model.CityInListViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import me.dmdev.rxpm.PresentationModel
-import me.dmdev.rxpm.action
-import me.dmdev.rxpm.bindProgress
-import me.dmdev.rxpm.state
+import io.reactivex.Single
+import me.dmdev.rxpm.*
 import ru.terrakok.cicerone.Router
 import timber.log.Timber
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class CityListPm @Inject constructor(
@@ -18,11 +15,18 @@ class CityListPm @Inject constructor(
     private val router: Router
 ) : PresentationModel() {
 
-    val cities = state {
-        cityListInteractor.getCitiesFromApi("mos")
-            .bindProgress(progressVisible.consumer)
-            .toObservable()
-    }
+    val cities = state<List<CityInListViewModel>>(emptyList())
+//    {
+//        searchTextChanged.observable
+//            .flatMapSingle {
+//                if (it.isEmpty()) {
+//                    Single.just(emptyList())
+//                } else {
+//                    cityListInteractor.getCitiesFromApi(it.toString())
+//                        .bindProgress(progressVisible.consumer)
+//                }
+//            }
+//    }
 
     val progressVisible = state(false)
 
@@ -31,10 +35,24 @@ class CityListPm @Inject constructor(
             .doOnNext { router.navigateTo(Screens.SingleCityScreen(it.locationKey)) }
     }
 
-    val searchTextChanged = action<String> {
-        this.doOnNext { Timber.d("action: $it") }
-            .doOnNext { cityListInteractor.getCitiesFromApi(it.toString()) }
+    val searchTextChanged = action<CharSequence> {
+        this.debounce(300, TimeUnit.MILLISECONDS)
+            .doOnNext { Timber.d("action: $it") }
+            .flatMapSingle {
+                if (it.isEmpty()) {
+                    Single.just(emptyList())
+                } else {
+                    cityListInteractor.getCitiesFromApi(it.toString())
+                        .bindProgress(progressVisible.consumer)
+                }
+            }
+            .doOnNext(cities.consumer::accept)
+            .doOnError{
+                errorCommand.accept(it.message ?: "Unexpected error!")
+            }
     }
+
+    val errorCommand = command<String>()
 
     override fun onCreate() {
         super.onCreate()

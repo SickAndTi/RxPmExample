@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.SearchView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegatesManager
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
+import com.jakewharton.rxbinding3.appcompat.queryTextChanges
 import com.krit.appforkrit.App
 import com.krit.appforkrit.R
 import com.krit.appforkrit.presentation.CityListPm
@@ -38,7 +39,11 @@ class CityListFragment: PmFragment<CityListPm>() {
 
         pm.progressVisible bindTo progressBar.visibility()
 
-//        pm.searchTextChanged passTo
+        searchView.queryTextChanges() bindTo pm.searchTextChanged
+
+        pm.errorCommand bindTo {
+            Toast.makeText(context, it, Toast.LENGTH_LONG).show()
+        }
     }
 
     override fun providePresentationModel(): CityListPm = cityListPm
@@ -58,18 +63,6 @@ class CityListFragment: PmFragment<CityListPm>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
-
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                Timber.d("textSubmitted: $query")
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                Timber.d("textChanged: $newText")
-                return false
-            }
-        })
 
     }
 

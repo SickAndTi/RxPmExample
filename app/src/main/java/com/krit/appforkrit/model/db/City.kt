@@ -3,12 +3,13 @@ package com.krit.appforkrit.model.db
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "cities")
+@Entity(
+    tableName = "cities"
+)
 data class City (
-    @PrimaryKey
-    val id: Int,
+    @PrimaryKey(autoGenerate = false)
+    val locationKey: String,
 
     val name: String,
-    val countryName: String,
-    val locationKey: String
+    val countryName: String
 )
