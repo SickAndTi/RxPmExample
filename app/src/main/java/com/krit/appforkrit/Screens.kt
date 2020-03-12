@@ -10,7 +10,7 @@ object Screens {
         override fun getFragment() = CityListFragment.newInstance()
     }
 
-    data class SingleCityScreen(val locationKey: Long) : SupportAppScreen() {
+    data class SingleCityScreen(val locationKey: String) : SupportAppScreen() {
         override fun getFragment() = SingleCityFragment.newInstance(locationKey)
     }
 }

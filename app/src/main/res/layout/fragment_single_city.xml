@@ -1,6 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineCenter"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="194dp" />
+
+    <TextView
+        android:id="@+id/cityNameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@+id/guidelineCenter"
+        android:padding="@dimen/padding_small"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        tools:text="Moscow"/>
+
+    <TextView
+        android:id="@+id/countryNameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/cityNameTv"
+        app:layout_constraintBottom_toBottomOf="@id/cityNameTv"
+        app:layout_constraintLeft_toRightOf="@+id/guidelineCenter"
+        app:layout_constraintRight_toRightOf="parent"
+        android:padding="@dimen/padding_small"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        tools:text="Russia"/>
+
+    <TextView
+        android:id="@+id/temperatureNameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/cityNameTv"
+        app:layout_constraintLeft_toLeftOf="@+id/cityNameTv"
+        app:layout_constraintRight_toRightOf="@+id/cityNameTv"
+        android:padding="@dimen/padding_small"
+        android:textColor="@color/red"
+        android:textSize="14sp"
+        tools:text="+22"/>
+
+    <TextView
+        android:id="@+id/weatherDescTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/countryNameTv"
+        app:layout_constraintLeft_toLeftOf="@+id/countryNameTv"
+        app:layout_constraintRight_toRightOf="@+id/countryNameTv"
+        android:padding="@dimen/padding_small"
+        android:textColor="@color/red"
+        android:textSize="14sp"
+        tools:text="Weather description"/>
+
+    <TextView
+        android:id="@+id/isDayTimeTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/temperatureNameTv"
+        app:layout_constraintLeft_toLeftOf="@+id/temperatureNameTv"
+        app:layout_constraintRight_toRightOf="@+id/temperatureNameTv"
+        android:padding="@dimen/padding_small"
+        android:textColor="@color/red"
+        android:textSize="14sp"
+        tools:text="День"/>
+
+    <TextView
+        android:id="@+id/currentTimeTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/weatherDescTv"
+        app:layout_constraintLeft_toLeftOf="@+id/weatherDescTv"
+        app:layout_constraintRight_toRightOf="@+id/weatherDescTv"
+        android:padding="@dimen/padding_small"
+        android:textColor="@color/red"
+        android:textSize="14sp"
+        tools:text="10:23"/>
+
+    <TextView
+        android:id="@+id/windDirectionTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/isDayTimeTv"
+        app:layout_constraintLeft_toLeftOf="@+id/isDayTimeTv"
+        app:layout_constraintRight_toRightOf="@+id/isDayTimeTv"
+        android:padding="@dimen/padding_small"
+        android:textColor="@color/red"
+        android:textSize="14sp"
+        tools:text="Северный"/>
+
+    <TextView
+        android:id="@+id/windSpeedTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/currentTimeTv"
+        app:layout_constraintLeft_toLeftOf="@+id/currentTimeTv"
+        app:layout_constraintRight_toRightOf="@+id/currentTimeTv"
+        android:padding="@dimen/padding_small"
+        android:textColor="@color/red"
+        android:textSize="14sp"
+        tools:text="5м/с"/>
+
+    <TextView
+        android:id="@+id/relativeHumidityTextTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="относительна влажность"
+        app:layout_constraintTop_toBottomOf="@+id/windDirectionTv"
+        app:layout_constraintLeft_toLeftOf="@+id/windDirectionTv"
+        app:layout_constraintRight_toRightOf="@+id/windDirectionTv"
+        android:padding="@dimen/padding_small"
+        android:textColor="@color/red"
+        android:textSize="14sp"
+        tools:text="Относительная влажность"/>
+
+    <TextView
+        android:id="@+id/relativeHumidityValueTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/windSpeedTv"
+        app:layout_constraintLeft_toLeftOf="@+id/windSpeedTv"
+        app:layout_constraintRight_toRightOf="@+id/windSpeedTv"
+        android:padding="@dimen/padding_small"
+        android:textColor="@color/red"
+        android:textSize="14sp"
+        tools:text="78%"/>
+
+    <TextView
+        android:id="@+id/visibilityTextTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Видимость"
+        app:layout_constraintTop_toBottomOf="@+id/relativeHumidityTextTv"
+        app:layout_constraintLeft_toLeftOf="@+id/relativeHumidityTextTv"
+        app:layout_constraintRight_toRightOf="@+id/relativeHumidityTextTv"
+        android:padding="@dimen/padding_small"
+        android:textColor="@color/red"
+        android:textSize="14sp"
+        tools:text="Видимость"/>
+
+    <TextView
+        android:id="@+id/visibilityValueTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/relativeHumidityValueTv"
+        app:layout_constraintLeft_toLeftOf="@+id/relativeHumidityValueTv"
+        app:layout_constraintRight_toRightOf="@+id/relativeHumidityValueTv"
+        android:padding="@dimen/padding_small"
+        android:textColor="@color/red"
+        android:textSize="14sp"
+        tools:text="65%"/>
+
+    <TextView
+        android:id="@+id/pressureTextTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Давление"
+        app:layout_constraintTop_toBottomOf="@+id/visibilityTextTv"
+        app:layout_constraintLeft_toLeftOf="@+id/visibilityTextTv"
+        app:layout_constraintRight_toRightOf="@+id/visibilityTextTv"
+        android:padding="@dimen/padding_small"
+        android:textColor="@color/red"
+        android:textSize="14sp"
+        tools:text="Давление"/>
+
+    <TextView
+        android:id="@+id/pressureValueTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/visibilityValueTv"
+        app:layout_constraintLeft_toLeftOf="@+id/visibilityValueTv"
+        app:layout_constraintRight_toRightOf="@+id/visibilityValueTv"
+        android:padding="@dimen/padding_small"
+        android:textColor="@color/red"
+        android:textSize="14sp"
+        tools:text="760ммртст"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

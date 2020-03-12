@@ -2,7 +2,7 @@ package com.krit.appforkrit.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.krit.App
+import com.krit.appforkrit.App
 import com.krit.appforkrit.R
 import com.krit.appforkrit.Screens
 import ru.terrakok.cicerone.Navigator
@@ -37,8 +37,9 @@ class MainActivity : AppCompatActivity() {
         Timber.d("On create: ${this::class.java}")
         Timber.d("Router: $router")
 
-        router.navigateTo(Screens.CityListScreen)
-
+        if (savedInstanceState == null) {
+            router.newRootScreen(Screens.CityListScreen)
+        }
 
     }
 

@@ -1,17 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorPrimary"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:elevation="4dp"
+    android:layout_margin="@dimen/padding_default"
+    android:padding="@dimen/padding_small"
+    app:cardCornerRadius="10dp">
 
-    <TextView
-        android:id="@+id/cityNameTv"
-        app:layout_constraintTop_toTopOf="parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="@color/gray">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineCenter"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="194dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/cityNameTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@+id/guidelineCenter"
+            android:padding="@dimen/padding_small"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            tools:text="Moscow"/>
+
+        <TextView
+            android:id="@+id/countryNameTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/cityNameTv"
+            app:layout_constraintBottom_toBottomOf="@id/cityNameTv"
+            app:layout_constraintLeft_toRightOf="@+id/guidelineCenter"
+            app:layout_constraintRight_toRightOf="parent"
+            android:padding="@dimen/padding_small"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            tools:text="Russia"/>
+
+        <TextView
+            android:id="@+id/temperatureNameTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/cityNameTv"
+            app:layout_constraintLeft_toLeftOf="@+id/cityNameTv"
+            app:layout_constraintRight_toRightOf="@+id/cityNameTv"
+            android:padding="@dimen/padding_small"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            tools:text="+22"/>
+
+        <TextView
+            android:id="@+id/weatherDescTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/countryNameTv"
+            app:layout_constraintLeft_toLeftOf="@+id/countryNameTv"
+            app:layout_constraintRight_toRightOf="@+id/countryNameTv"
+            android:padding="@dimen/padding_small"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            tools:text="Weather description"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

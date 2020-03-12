@@ -8,5 +8,7 @@ data class City (
     @PrimaryKey
     val id: Int,
 
-    val name: String
+    val name: String,
+    val countryName: String,
+    val locationKey: String
 )

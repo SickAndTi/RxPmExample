@@ -1,5 +1,7 @@
 package com.krit.appforkrit.api
 
+import com.krit.appforkrit.model.nw.weather.NwWeather
+import io.reactivex.Single
 import javax.inject.Inject
 
 class ApiClient @Inject constructor(
@@ -10,5 +12,5 @@ class ApiClient @Inject constructor(
 
     fun searchCities(textToSearch: String) = api.searchCities(textToSearch)
 
-    fun getWeatherByLocationKey(fullInfo: Boolean, locationKey: Long) = api.getWeatherByLocationKey(fullInfo, locationKey)
+    fun getWeatherByLocationKey(locationKey: String, fullInfo: Boolean): Single<List<NwWeather>> = api.getWeatherByLocationKey(locationKey, fullInfo)
 }

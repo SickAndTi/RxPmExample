@@ -1,7 +1,11 @@
 package com.krit.appforkrit.ui.fragment
 
 import android.os.Bundle
-import com.krit.App
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import com.krit.appforkrit.App
+import com.krit.appforkrit.R
 import com.krit.appforkrit.presentation.SingleCityPm
 import me.dmdev.rxpm.base.PmFragment
 import timber.log.Timber
@@ -12,11 +16,11 @@ class SingleCityFragment: PmFragment<SingleCityPm>() {
     companion object {
         private const val ARG_LOCATION_KEY = "ARG_LOCATION_KEY"
 
-        fun newInstance(locationKey: Long): SingleCityFragment {
+        fun newInstance(locationKey: String): SingleCityFragment {
             Timber.d("newInstance: $locationKey")
             val fragment = SingleCityFragment()
             val args = Bundle()
-            args.putLong(ARG_LOCATION_KEY, locationKey)
+            args.putString(ARG_LOCATION_KEY, locationKey)
             fragment.arguments = args
             return fragment
         }
@@ -36,5 +40,13 @@ class SingleCityFragment: PmFragment<SingleCityPm>() {
         super.onCreate(savedInstanceState)
 
         Timber.d("On create: ${this::class.java}")
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+        inflater.inflate(R.layout.fragment_single_city, container, false)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
     }
 }

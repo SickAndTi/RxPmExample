@@ -1,4 +1,4 @@
-package com.krit
+package com.krit.appforkrit
 
 import android.app.Application
 import com.krit.appforkrit.di.AppComponent
