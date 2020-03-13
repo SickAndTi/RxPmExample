@@ -1,5 +1,6 @@
 package com.krit.appforkrit.ui.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -33,23 +34,24 @@ class WeatherFragment: PmFragment<WeatherPm>() {
     @Inject
     lateinit var weatherPm: WeatherPm
 
+    @SuppressLint("SetTextI18n")
     override fun onBindPresentationModel(pm: WeatherPm) {
 
-        pm.weather bindTo {
+        pm.weather bindTo { it ->
             toolbar.title = it.cityName
             toolbar.subtitle = it.countryName
             toolbar.setNavigationOnClickListener { pm.backButtonPressed.consumer.accept(Unit) }
-            temperatureNameTv.text = it.temperature.toString()
-            weatherDescTv.text = it.weatherDesc
+            temperatureValueTv.text = it.temperature.toString() + it.temperatureType
+            weatherDescValueTv.text = it.weatherDesc
             isDayTimeTv.text = if(it.isDayTime) getString(R.string.day_text) else getString(R.string.night_text)
-            val date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault()).parse(it.localObservationDateTime)
-            val date2 = SimpleDateFormat("dd EEE HH:mm", Locale.getDefault())
-            currentTimeTv.text = date2.format(date!!)
-            windDirectionTv.text = it.windDirection
-            windSpeedTv.text = it.windSpeed.toString()
+            val dateIn = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault()).parse(it.localObservationDateTime)
+            val dateOut = SimpleDateFormat("dd EEE HH:mm", Locale.getDefault())
+            currentTimeTv.text = dateOut.format(dateIn!!)
+            windDirectionValueTv.text = it.windDirection
+            windSpeedValueTv.text = it.windSpeed.toString() + it.windSpeedType
             relativeHumidityValueTv.text = it.relativeHumidity.toString()
-            visibilityValueTv.text = it.visibility.toString()
-            pressureValueTv.text = it.pressure.toString()
+            visibilityValueTv.text = it.visibility.toString() + it.visibilityType
+            pressureValueTv.text = it.pressure.toString() + it.pressureType
 
         }
     }

@@ -13,8 +13,8 @@ fun cityAdapterDelegate(itemClickedListener: (CityInListViewModel) -> Unit) =
             with(itemView){
                 cityNameTv.text = item.cityName
                 countryNameTv.text = item.countryName
-                temperatureNameTv.text = item.temperature.toString()
-                weatherDescTv.text = item.weatherDesc
+                temperatureValueTv.text = item.temperature.toString()
+                weatherDescValueTv.text = item.weatherDesc
                 setOnClickListener { itemClickedListener(item) }
             }
         }

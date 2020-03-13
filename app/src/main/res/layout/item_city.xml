@@ -47,7 +47,7 @@
             tools:text="Russia"/>
 
         <TextView
-            android:id="@+id/temperatureNameTv"
+            android:id="@+id/temperatureValueTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/cityNameTv"
@@ -59,7 +59,7 @@
             tools:text="+22"/>
 
         <TextView
-            android:id="@+id/weatherDescTv"
+            android:id="@+id/weatherDescValueTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/countryNameTv"

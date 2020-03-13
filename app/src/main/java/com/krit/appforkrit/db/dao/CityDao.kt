@@ -24,7 +24,7 @@ interface CityDao {
     @Query("""
              SELECT c.locationKey, c.cityName, c.countryName, w.temperature, w.weatherDesc 
              FROM cities c 
-             JOIN weathers w ON w.locationKey = c.locationKey 
+             LEFT OUTER JOIN weathers w ON w.locationKey = c.locationKey 
              WHERE c.locationKey IN (:locationKeys)
         """)
     fun getCitiesWithWeatherByLocationKeys(locationKeys: List<String>): Single<List<CityInListViewModel>>
@@ -32,7 +32,7 @@ interface CityDao {
     @Query("""
              SELECT c.locationKey, c.cityName , c.countryName, w.temperature, w.weatherDesc 
              FROM cities c 
-             JOIN weathers w ON w.locationKey = c.locationKey
+             LEFT OUTER JOIN weathers w ON w.locationKey = c.locationKey
         """)
     fun getCitiesWithWeather(): Single<List<CityInListViewModel>>
 

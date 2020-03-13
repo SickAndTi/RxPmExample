@@ -25,10 +25,10 @@ interface WeatherDao {
     fun insert(weather: Weather)
 
     @Query("""
-             SELECT c.cityName, c.countryName, w.temperature, w.weatherDesc, w.isDayTime, 
-             w.localObservationDateTime, w.pressure, w.relativeHumidity, w.visibility, w.windDirection, w.windSpeed
+             SELECT c.cityName, c.countryName, w.temperature, w.temperatureType, w.weatherDesc, w.isDayTime, 
+             w.localObservationDateTime, w.pressure, w.pressureType, w.relativeHumidity, w.visibility, w.visibilityType, w.windDirection, w.windSpeed, w.windSpeedType
              FROM weathers w 
-             JOIN cities c ON w.locationKey = c.locationKey 
+             LEFT OUTER JOIN cities c ON w.locationKey = c.locationKey 
              WHERE w.locationKey =:locationKey
         """)
     fun getWeatherAndCityByLocationKey(locationKey: String): Single<WeatherViewModel>

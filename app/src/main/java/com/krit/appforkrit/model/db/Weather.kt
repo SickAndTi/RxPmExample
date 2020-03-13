@@ -20,12 +20,16 @@ data class Weather (
     val locationKey: String,
 
     val temperature: Double? = null,
+    val temperatureType: String,
     val weatherDesc: String? = null,
     val localObservationDateTime: String,
     val isDayTime: Boolean,
     val relativeHumidity: Int? = null,
     val windDirection: String? = null,
     val windSpeed: Double? = null,
+    val windSpeedType: String,
     val visibility: Double? = null,
-    val pressure: Double? = null
+    val visibilityType: String,
+    val pressure: Double? = null,
+    val pressureType: String
 )

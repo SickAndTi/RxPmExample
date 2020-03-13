@@ -60,17 +60,20 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     //mvvm
-    implementation 'me.dmdev.rxpm:rxpm:2.1'
+    implementation "me.dmdev.rxpm:rxpm:2.1"
+
     //rxbinding
-    implementation 'com.jakewharton.rxbinding3:rxbinding:3.1.0'
-    implementation 'com.jakewharton.rxbinding3:rxbinding-appcompat:3.1.0'
+    def rxBindingVersion = "3.1.0"
+    implementation "com.jakewharton.rxbinding3:rxbinding:$rxBindingVersion"
+    implementation "com.jakewharton.rxbinding3:rxbinding-appcompat:$rxBindingVersion"
 
     //di
-    kapt "com.google.dagger:dagger-compiler:2.24"
-    implementation "com.google.dagger:dagger:2.24"
+    def daggerVersion = "2.24"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    implementation "com.google.dagger:dagger:$daggerVersion"
 
     //retrofit + okhttp
-    def retrofitVersion = '2.7.2'
+    def retrofitVersion = "2.7.2"
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:4.4.0"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
@@ -84,15 +87,15 @@ dependencies {
     kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
 
     //adapter delegate
-    implementation 'com.hannesdorfmann:adapterdelegates4-kotlin-dsl:4.2.0'
-    implementation 'com.hannesdorfmann:adapterdelegates4-kotlin-dsl-layoutcontainer:4.2.0'
+    def adapterDelegateVersion = "4.2.0"
+    implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl:$adapterDelegateVersion"
+    implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-layoutcontainer:$adapterDelegateVersion"
 
     //navigation
     implementation "ru.terrakok.cicerone:cicerone:5.1.0"
 
     //db
     def room_version = "2.2.4"
-
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
@@ -100,5 +103,4 @@ dependencies {
 
     //logs
     implementation 'com.jakewharton.timber:timber:4.7.1'
-
 }

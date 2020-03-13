@@ -8,7 +8,6 @@ import com.krit.appforkrit.model.db.Weather
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import timber.log.Timber
 import javax.inject.Inject
 
 class CityListInteractor @Inject constructor(
@@ -39,13 +38,17 @@ class CityListInteractor @Inject constructor(
                                     locationKey = city.locationKey,
                                     weatherDesc = it.weatherText,
                                     temperature = it.temperature.metric.value,
+                                    temperatureType = it.temperature.metric.unit,
                                     isDayTime = it.isDayTime,
                                     localObservationDateTime = it.localObservationDateTime,
                                     pressure = it.pressure.metric.value,
+                                    pressureType = it.pressure.metric.unit,
                                     relativeHumidity = it.relativeHumidity,
                                     visibility = it.visibility.metric.value,
+                                    visibilityType = it.visibility.metric.unit,
                                     windDirection = it.wind.direction.english,
-                                    windSpeed = it.wind.speed.metric.value
+                                    windSpeed = it.wind.speed.metric.value,
+                                    windSpeedType = it.wind.speed.metric.unit
                                 )
                             }
                             .doOnSuccess { appDatabase.weatherDao().insert(it) }

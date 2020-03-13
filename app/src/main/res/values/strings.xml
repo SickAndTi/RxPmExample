@@ -2,4 +2,11 @@
     <string name="app_name">AppForKrit</string>
     <string name="day_text">Day</string>
     <string name="night_text">Night</string>
+    <string name="wind_direction_text">Wind direction</string>
+    <string name="wind_speed_text">Wind speed</string>
+    <string name="relative_humidity_text">Relative humidity</string>
+    <string name="visibility_text">Visibility</string>
+    <string name="pressure_text">Pressure</string>
+    <string name="temperature_text">Temperature</string>
+    <string name="weather_desc_text">Weather description</string>
 </resources>
