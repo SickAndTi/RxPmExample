@@ -12,7 +12,7 @@ data class NwWeather (
     val epochTime: Int,
 
     @field:Json(name = "WeatherText")
-    val weatherText: String,
+    val weatherText: String? = null,
 
     @field:Json(name = "WeatherIcon")
     val weatherIcon: Int? = null,

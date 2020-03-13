@@ -31,6 +31,7 @@ class CityListInteractor @Inject constructor(
                 Flowable.fromIterable(cities)
                     .flatMapSingle { city ->
                         weatherInteractor.getWeatherByLocationKey(city.locationKey, true)
+                                //cause api gives array with one element for this request
                             .map { it.first() }
                             .map {
                                 Weather(
@@ -50,10 +51,13 @@ class CityListInteractor @Inject constructor(
                     }
                     .toList()
             }
-            .map { it.map { it.locationKey } }
+            .map { weatherList -> weatherList.map { it.locationKey } }
             .flatMap { appDatabase.cityDao().getCitiesWithWeatherByLocationKeys(it) }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 
+    fun getAllFromDb() = appDatabase.cityDao().getCitiesWithWeather()
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
 
 }

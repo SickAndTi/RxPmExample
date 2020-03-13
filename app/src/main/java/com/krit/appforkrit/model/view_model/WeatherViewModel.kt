@@ -1,10 +1,10 @@
 package com.krit.appforkrit.model.view_model
 
-data class SingleCityViewModel (
+data class WeatherViewModel (
     val cityName: String,
     val countryName: String,
     val temperature: Double? = null,
-    val weatherDesc: String,
+    val weatherDesc: String? = null,
     val localObservationDateTime: String,
     val isDayTime: Boolean,
     val relativeHumidity: Int? = null,

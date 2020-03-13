@@ -1,7 +1,7 @@
 package com.krit.appforkrit
 
 import com.krit.appforkrit.ui.fragment.CityListFragment
-import com.krit.appforkrit.ui.fragment.SingleCityFragment
+import com.krit.appforkrit.ui.fragment.WeatherFragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
 object Screens {
@@ -11,6 +11,6 @@ object Screens {
     }
 
     data class SingleCityScreen(val locationKey: String) : SupportAppScreen() {
-        override fun getFragment() = SingleCityFragment.newInstance(locationKey)
+        override fun getFragment() = WeatherFragment.newInstance(locationKey)
     }
 }

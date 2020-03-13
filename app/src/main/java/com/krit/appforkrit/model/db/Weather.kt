@@ -20,7 +20,7 @@ data class Weather (
     val locationKey: String,
 
     val temperature: Double? = null,
-    val weatherDesc: String,
+    val weatherDesc: String? = null,
     val localObservationDateTime: String,
     val isDayTime: Boolean,
     val relativeHumidity: Int? = null,

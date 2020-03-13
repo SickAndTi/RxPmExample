@@ -6,6 +6,6 @@ data class CityInListViewModel (
     val cityName: String,
     val countryName: String,
     val temperature: Double?,
-    val weatherDesc: String,
+    val weatherDesc: String? = null,
     val locationKey: String
 ):MyListItem

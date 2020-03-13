@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AppForKrit</string>
+    <string name="day_text">Day</string>
+    <string name="night_text">Night</string>
 </resources>
