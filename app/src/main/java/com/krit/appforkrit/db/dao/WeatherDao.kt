@@ -25,7 +25,7 @@ interface WeatherDao {
     fun insert(weather: Weather)
 
     @Query("""
-             SELECT c.name as cityName, c.countryName, w.temperature, w.weatherDesc, w.isDayTime, 
+             SELECT c.cityName, c.countryName, w.temperature, w.weatherDesc, w.isDayTime, 
              w.localObservationDateTime, w.pressure, w.relativeHumidity, w.visibility, w.windDirection, w.windSpeed
              FROM weathers w 
              JOIN cities c ON w.locationKey = c.locationKey 

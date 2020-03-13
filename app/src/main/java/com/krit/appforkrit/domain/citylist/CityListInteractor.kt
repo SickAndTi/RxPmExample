@@ -8,6 +8,7 @@ import com.krit.appforkrit.model.db.Weather
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 import javax.inject.Inject
 
 class CityListInteractor @Inject constructor(
@@ -21,7 +22,7 @@ class CityListInteractor @Inject constructor(
                 listNwCty.map { nwCity ->
                     City(
                         locationKey = nwCity.key,
-                        name = nwCity.localizedName,
+                        cityName = nwCity.localizedName,
                         countryName = nwCity.country.localizedName
                     )
                 }
@@ -31,7 +32,7 @@ class CityListInteractor @Inject constructor(
                 Flowable.fromIterable(cities)
                     .flatMapSingle { city ->
                         weatherInteractor.getWeatherByLocationKey(city.locationKey, true)
-                                //cause api gives array with one element for this request
+                            //cause api gives array with one element for this request
                             .map { it.first() }
                             .map {
                                 Weather(
@@ -56,8 +57,14 @@ class CityListInteractor @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 
-    fun getAllFromDb() = appDatabase.cityDao().getCitiesWithWeather()
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
+    fun getAllFromDb() =
+        appDatabase.cityDao().getCitiesWithWeather()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+
+    fun searchFromDb(queryText: String) =
+        appDatabase.cityDao().searchByTextQuery(queryText)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
 
 }

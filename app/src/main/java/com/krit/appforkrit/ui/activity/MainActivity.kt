@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
-    var navigator: Navigator = object :SupportAppNavigator(this, R.id.mainContainer){
+    var navigator: Navigator = object :SupportAppNavigator(this, R.id.mainContainer) {
         override fun applyCommand(command: Command) {
             super.applyCommand(command)
             Timber.d("Command:$command")

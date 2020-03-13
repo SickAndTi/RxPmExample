@@ -14,9 +14,31 @@ class CityListPm @Inject constructor(
     private val router: Router
 ) : PresentationModel() {
 
-    val cities = state<List<CityInListViewModel>>(emptyList())
+    sealed class DownloadState {
+        object Initial: DownloadState()
+        object Loading: DownloadState()
+        class Finished(val cities: List<CityInListViewModel>) : DownloadState()
+        class Error(val errorMessage: String) : DownloadState()
+    }
 
-    val progressVisible = state(false)
+    private val downloadState = state<DownloadState>(DownloadState.Initial)
+
+    val cities = state<List<CityInListViewModel>>{
+        downloadState.observable
+            .filter { it is DownloadState.Finished }
+            .map { it as DownloadState.Finished }
+            .map { it.cities }
+    }
+
+    val progressVisible = state {
+        this.downloadState.observable
+            .map { downloadState ->
+                when (downloadState) {
+                    is DownloadState.Loading -> true
+                    else -> false
+                }
+            }
+    }
 
     val citiesClicks = action<CityInListViewModel> {
         this.doOnNext { Timber.d("action: $it") }
@@ -25,23 +47,30 @@ class CityListPm @Inject constructor(
 
     val searchTextChanged = action<CharSequence> {
         this.debounce(300, TimeUnit.MILLISECONDS)
+            .distinctUntilChanged()
             .doOnNext { Timber.d("action: $it") }
-            .flatMapSingle {
-                if (it.isEmpty()) {
+            .doOnNext { downloadState.accept(DownloadState.Loading) }
+            .flatMapSingle { queryText ->
+                if (queryText.isEmpty()) {
                     cityListInteractor.getAllFromDb()
-                        .bindProgress(progressVisible.consumer)
                 } else {
-                    cityListInteractor.getCitiesFromApi(it.toString())
-                        .bindProgress(progressVisible.consumer)
+                    cityListInteractor.getCitiesFromApi(queryText.toString())
+                        .doOnError { downloadState.accept(DownloadState.Error(it.message ?: "Unexpected error!")) }
+                        .onErrorResumeNext {
+                            cityListInteractor.searchFromDb(queryText.toString())
+                                .doOnSuccess { Timber.d("INFO: $it") }
+                        }
                 }
             }
-            .doOnNext(cities.consumer::accept)
-            .doOnError {
-                errorCommand.accept(it.message ?: "Unexpected error!")
-            }
+            .doOnNext { downloadState.accept(DownloadState.Finished(it)) }
     }
 
-    val errorCommand = command<String>()
+    val errorState = state<String> {
+        downloadState.observable
+            .filter { it is DownloadState.Error }
+            .map { it as DownloadState.Error }
+            .map { it.errorMessage }
+    }
 
     override fun onCreate() {
         super.onCreate()

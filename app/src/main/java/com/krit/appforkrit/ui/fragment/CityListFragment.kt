@@ -39,12 +39,18 @@ class CityListFragment: PmFragment<CityListPm>() {
 
         pm.progressVisible bindTo progressBar.visibility()
 
+        pm.progressVisible bindTo {
+            cityListRecyclerView.visibility = if (it) View.GONE else View.VISIBLE
+            Timber.d("VISIBILITY: ${cityListRecyclerView.visibility}")
+        }
+
         searchView.queryTextChanges() bindTo pm.searchTextChanged
 
-        pm.errorCommand bindTo {
+        pm.errorState bindTo {
             Toast.makeText(context, it, Toast.LENGTH_LONG).show()
         }
     }
+
 
     override fun providePresentationModel(): CityListPm = cityListPm
 

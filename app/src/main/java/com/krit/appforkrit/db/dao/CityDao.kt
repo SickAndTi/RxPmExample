@@ -2,7 +2,6 @@ package com.krit.appforkrit.db.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
-import androidx.room.OnConflictStrategy
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
 import com.krit.appforkrit.model.db.City
@@ -23,7 +22,7 @@ interface CityDao {
     fun insertAll(listCities: List<City>)
 
     @Query("""
-             SELECT c.locationKey, c.name as cityName, c.countryName, w.temperature, w.weatherDesc 
+             SELECT c.locationKey, c.cityName, c.countryName, w.temperature, w.weatherDesc 
              FROM cities c 
              JOIN weathers w ON w.locationKey = c.locationKey 
              WHERE c.locationKey IN (:locationKeys)
@@ -31,10 +30,19 @@ interface CityDao {
     fun getCitiesWithWeatherByLocationKeys(locationKeys: List<String>): Single<List<CityInListViewModel>>
 
     @Query("""
-             SELECT c.locationKey, c.name as cityName, c.countryName, w.temperature, w.weatherDesc 
+             SELECT c.locationKey, c.cityName , c.countryName, w.temperature, w.weatherDesc 
              FROM cities c 
              JOIN weathers w ON w.locationKey = c.locationKey
         """)
     fun getCitiesWithWeather(): Single<List<CityInListViewModel>>
+
+    @Query("""
+             SELECT c.locationKey, c.cityName , c.countryName, w.temperature, w.weatherDesc 
+             FROM cities c 
+             JOIN weathers w ON w.locationKey = c.locationKey
+             WHERE c.cityName LIKE '%' || :queryText || '%'
+        """
+    )
+    fun searchByTextQuery(queryText: String): Single<List<CityInListViewModel>>
 
 }

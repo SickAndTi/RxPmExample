@@ -10,6 +10,6 @@ data class City (
     @PrimaryKey(autoGenerate = false)
     val locationKey: String,
 
-    val name: String,
+    val cityName: String,
     val countryName: String
 )
