@@ -8,6 +8,9 @@ import com.krit.appforkrit.App
 import com.krit.appforkrit.R
 import com.krit.appforkrit.presentation.WeatherPm
 import kotlinx.android.synthetic.main.fragment_weather.*
+import kotlinx.android.synthetic.main.fragment_weather.temperatureNameTv
+import kotlinx.android.synthetic.main.fragment_weather.weatherDescTv
+import kotlinx.android.synthetic.main.item_city.*
 import me.dmdev.rxpm.base.PmFragment
 import me.dmdev.rxpm.bindTo
 import timber.log.Timber
@@ -34,15 +37,12 @@ class WeatherFragment: PmFragment<WeatherPm>() {
     override fun onBindPresentationModel(pm: WeatherPm) {
 
         pm.weather bindTo {
-            cityNameTv.text = it.cityName
-            countryNameTv.text = it.countryName
+            toolbar.title = it.cityName
+            toolbar.subtitle = it.countryName
+            toolbar.setNavigationOnClickListener { pm.backButtonPressed.consumer.accept(Unit) }
             temperatureNameTv.text = it.temperature.toString()
             weatherDescTv.text = it.weatherDesc
-            if(it.isDayTime){
-                isDayTimeTv.text = getString(R.string.day_text)
-            } else {
-                isDayTimeTv.text = getString(R.string.night_text)
-            }
+            isDayTimeTv.text = if(it.isDayTime) getString(R.string.day_text) else getString(R.string.night_text)
             currentTimeTv.text = it.localObservationDateTime
             windDirectionTv.text = it.windDirection
             windSpeedTv.text = it.windSpeed.toString()

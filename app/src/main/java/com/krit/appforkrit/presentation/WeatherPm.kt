@@ -3,6 +3,7 @@ package com.krit.appforkrit.presentation
 import com.krit.appforkrit.domain.weather.WeatherInteractor
 import com.krit.appforkrit.model.view_model.WeatherViewModel
 import me.dmdev.rxpm.PresentationModel
+import me.dmdev.rxpm.action
 import me.dmdev.rxpm.state
 import ru.terrakok.cicerone.Router
 import timber.log.Timber
@@ -26,5 +27,7 @@ class WeatherPm @Inject constructor(
         weatherInteractor.getWeatherFromDb(locationKey)
             .toObservable()
     }
+
+    val backButtonPressed = action<Unit>{ doOnNext { router.exit() } }
 
 }

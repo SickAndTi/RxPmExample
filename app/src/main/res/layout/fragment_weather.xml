@@ -13,38 +13,52 @@
         android:orientation="vertical"
         app:layout_constraintGuide_begin="194dp" />
 
-    <TextView
-        android:id="@+id/cityNameTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorAccent"
+        app:title="@string/app_name"
+        app:subtitle="@string/app_name"
+        app:titleTextColor="@android:color/black"
+        app:subtitleTextColor="@android:color/black"
+        app:navigationIcon="?attr/homeAsUpIndicator"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="@+id/guidelineCenter"
-        android:padding="@dimen/padding_small"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        tools:text="Moscow"/>
+        app:layout_constraintRight_toRightOf="parent"/>
 
-    <TextView
-        android:id="@+id/countryNameTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/cityNameTv"
-        app:layout_constraintBottom_toBottomOf="@id/cityNameTv"
-        app:layout_constraintLeft_toRightOf="@+id/guidelineCenter"
-        app:layout_constraintRight_toRightOf="parent"
-        android:padding="@dimen/padding_small"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        tools:text="Russia"/>
+    <!--    <TextView-->
+    <!--        android:id="@+id/cityNameTv"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/toolbar"-->
+    <!--        app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--        app:layout_constraintRight_toRightOf="@+id/guidelineCenter"-->
+    <!--        android:padding="@dimen/padding_small"-->
+    <!--        android:textColor="@color/black"-->
+    <!--        android:textSize="14sp"-->
+    <!--        tools:text="Moscow"/>-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/countryNameTv"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:layout_constraintTop_toTopOf="@id/cityNameTv"-->
+    <!--        app:layout_constraintBottom_toBottomOf="@id/cityNameTv"-->
+    <!--        app:layout_constraintLeft_toRightOf="@+id/guidelineCenter"-->
+    <!--        app:layout_constraintRight_toRightOf="parent"-->
+    <!--        android:padding="@dimen/padding_small"-->
+    <!--        android:textColor="@color/black"-->
+    <!--        android:textSize="14sp"-->
+    <!--        tools:text="Russia"/>-->
 
     <TextView
         android:id="@+id/temperatureNameTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/cityNameTv"
-        app:layout_constraintLeft_toLeftOf="@+id/cityNameTv"
-        app:layout_constraintRight_toRightOf="@+id/cityNameTv"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@id/guidelineCenter"
         android:padding="@dimen/padding_small"
         android:textColor="@color/red"
         android:textSize="14sp"
@@ -54,9 +68,10 @@
         android:id="@+id/weatherDescTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/countryNameTv"
-        app:layout_constraintLeft_toLeftOf="@+id/countryNameTv"
-        app:layout_constraintRight_toRightOf="@+id/countryNameTv"
+        app:layout_constraintTop_toTopOf="@id/temperatureNameTv"
+        app:layout_constraintBottom_toBottomOf="@+id/temperatureNameTv"
+        app:layout_constraintLeft_toRightOf="@id/guidelineCenter"
+        app:layout_constraintRight_toRightOf="parent"
         android:padding="@dimen/padding_small"
         android:textColor="@color/red"
         android:textSize="14sp"
