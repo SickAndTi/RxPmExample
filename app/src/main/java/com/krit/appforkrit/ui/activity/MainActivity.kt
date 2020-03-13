@@ -29,13 +29,11 @@ class MainActivity : AppCompatActivity() {
     lateinit var router: Router
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         App.COMPONENT.inject(this)
-
-        Timber.d("On create: ${this::class.java}")
-        Timber.d("Router: $router")
 
         if (savedInstanceState == null) {
             router.newRootScreen(Screens.CityListScreen)
