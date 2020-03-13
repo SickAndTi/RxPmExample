@@ -8,12 +8,11 @@ import com.krit.appforkrit.App
 import com.krit.appforkrit.R
 import com.krit.appforkrit.presentation.WeatherPm
 import kotlinx.android.synthetic.main.fragment_weather.*
-import kotlinx.android.synthetic.main.fragment_weather.temperatureNameTv
-import kotlinx.android.synthetic.main.fragment_weather.weatherDescTv
-import kotlinx.android.synthetic.main.item_city.*
 import me.dmdev.rxpm.base.PmFragment
 import me.dmdev.rxpm.bindTo
 import timber.log.Timber
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 class WeatherFragment: PmFragment<WeatherPm>() {
@@ -43,7 +42,9 @@ class WeatherFragment: PmFragment<WeatherPm>() {
             temperatureNameTv.text = it.temperature.toString()
             weatherDescTv.text = it.weatherDesc
             isDayTimeTv.text = if(it.isDayTime) getString(R.string.day_text) else getString(R.string.night_text)
-            currentTimeTv.text = it.localObservationDateTime
+            val date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault()).parse(it.localObservationDateTime)
+            val date2 = SimpleDateFormat("dd EEE HH:mm", Locale.getDefault())
+            currentTimeTv.text = date2.format(date!!)
             windDirectionTv.text = it.windDirection
             windSpeedTv.text = it.windSpeed.toString()
             relativeHumidityValueTv.text = it.relativeHumidity.toString()
